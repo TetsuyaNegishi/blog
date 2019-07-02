@@ -3,7 +3,7 @@ module.exports = {
     title: `フロントエンドに進路を取れ`,
     author: `Tetsuya Negishi`,
     description: `フロントエンド中心の技術ブログ`,
-    siteUrl: `https://wonderful-nightingale-375384.netlify.com/`,
+    siteUrl: `https://blog.negi-t.tokyo/`,
     social: {
       twitter: `_negi_t`,
     },
