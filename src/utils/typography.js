@@ -1,7 +1,10 @@
 import Typography from "typography"
-import Wordpress2016 from "typography-theme-wordpress-2016"
+import bootstrap from "typography-theme-bootstrap"
 
-Wordpress2016.overrideThemeStyles = () => {
+bootstrap.headerFontFamily = ['-apple-system', 'Helvetica Neue', '游ゴシック体', 'YuGothic', 'Yu Gothic', 'sans-serif']
+bootstrap.bodyFontFamily = ['-apple-system', 'Helvetica Neue', '游ゴシック体', 'YuGothic', 'Yu Gothic Medium', 'sans-serif']
+
+bootstrap.overrideThemeStyles = () => {
   return {
     "a.gatsby-resp-image-link": {
       boxShadow: `none`,
@@ -9,9 +12,9 @@ Wordpress2016.overrideThemeStyles = () => {
   }
 }
 
-delete Wordpress2016.googleFonts
+delete bootstrap.googleFonts
 
-const typography = new Typography(Wordpress2016)
+const typography = new Typography(bootstrap)
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {
