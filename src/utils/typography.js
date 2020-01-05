@@ -6,6 +6,9 @@ bootstrap.bodyFontFamily = ['-apple-system', 'Helvetica Neue', '游ゴシック�
 
 bootstrap.overrideThemeStyles = () => {
   return {
+    "a": {
+      color: 'blue',
+    },
     "a.gatsby-resp-image-link": {
       boxShadow: `none`,
     },
