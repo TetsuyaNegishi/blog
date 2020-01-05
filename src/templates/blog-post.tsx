@@ -1,12 +1,12 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageRendererProps } from "gatsby"
 
 // import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-class BlogPostTemplate extends React.Component {
+class BlogPostTemplate extends React.Component<Props> {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
@@ -65,6 +65,19 @@ class BlogPostTemplate extends React.Component {
     )
   }
 }
+
+interface QueryProps {
+  data: any;
+}
+
+interface ContextProps {
+  pageContext: {
+    previous: any;
+    next: any;
+  }
+}
+
+type Props = QueryProps & ContextProps & PageRendererProps;
 
 export default BlogPostTemplate
 
