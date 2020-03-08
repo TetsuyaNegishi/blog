@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `NeGILog`,
+    title: `negi.log()`,
     author: `Tetsuya Negishi`,
     description: `フロントエンド中心の技術ブログ`,
     siteUrl: `https://blog.negi-t.tokyo/`,
