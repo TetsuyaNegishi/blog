@@ -12,6 +12,12 @@ bootstrap.overrideThemeStyles = () => {
     "a.gatsby-resp-image-link": {
       boxShadow: `none`,
     },
+    "code": {
+      margin: '0 0.3rem'
+    },
+    "div.gatsby-highlight": {
+      marginBottom: '1.5rem'
+    }
   }
 }
 
