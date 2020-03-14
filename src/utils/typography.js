@@ -1,9 +1,6 @@
 import Typography from "typography"
 import bootstrap from "typography-theme-bootstrap"
 
-bootstrap.headerFontFamily = ['-apple-system', 'Helvetica Neue', '游ゴシック体', 'YuGothic', 'Yu Gothic', 'sans-serif']
-bootstrap.bodyFontFamily = ['-apple-system', 'Helvetica Neue', '游ゴシック体', 'YuGothic', 'Yu Gothic Medium', 'sans-serif']
-
 bootstrap.overrideThemeStyles = () => {
   return {
     "a": {
