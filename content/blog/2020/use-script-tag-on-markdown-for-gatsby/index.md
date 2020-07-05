@@ -1,5 +1,5 @@
 ---
-title: [GatsbyJS] markdownファイル内のscriptタグを正しく動作させる方法
+title: GatsbyJSでmarkdownファイル内のscriptタグを正しく動作させる方法
 date: "2020-07-03"
 ---
 
