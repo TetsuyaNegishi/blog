@@ -8,11 +8,11 @@ import { SITE_URL } from "../../config";
 import fs from 'fs/promises'
 
 export async function getStaticPaths() {
-  const dir = await fs.readdir('./content/blog2')
+  const dir = await fs.readdir('./content/blog')
 
   const posts2 = await Promise.all(dir.map(async d => {
     const posts = await readAll({
-      directory: `blog2/${d}`,
+      directory: `blog/${d}`,
       frontmatterSchema: blog,
     });
     return posts.map(posts => {
@@ -40,7 +40,7 @@ if (typeof slug !== "string") {
 }
 
 const { content, frontmatter } = await readOne({
-  directory: `blog2/${year}`,
+  directory: `blog/${year}`,
   slug,
   frontmatterSchema: blog,
 });

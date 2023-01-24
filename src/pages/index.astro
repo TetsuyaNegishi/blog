@@ -6,7 +6,7 @@ import PageMeta from "../components/PageMeta.astro";
 import { SITE_TITLE } from "../config";
 import { globby } from "globby";
 
-const paths = await globby(`content/blog2/*/*.md`);
+const paths = await globby(`content/blog/*/*.md`);
 const posts = await Promise.all(paths.map(async path => {
   const post = await read({filepath: path, schema: blog})
   const year = path.split('/')[2]
