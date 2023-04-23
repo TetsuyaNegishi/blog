@@ -1,102 +1,103 @@
-import type { z } from "zod";
-import path from "path";
-import matter from "gray-matter";
-import fs from "fs/promises";
-import { globby } from "globby";
-import Markdoc from "@markdoc/markdoc";
-import { config } from "./markdoc.config";
+import type { z } from 'zod'
+import path from 'path'
+import matter from 'gray-matter'
+import fs from 'fs/promises'
+import { globby } from 'globby'
+import Markdoc from '@markdoc/markdoc'
+import { config } from './markdoc.config'
 
 // path is relative to where you run the `yarn build` command
-const contentDirectory = path.normalize("./content");
+const contentDirectory = path.normalize('./content')
 
-async function parseAndTransform({ content }: { content: string }) {
-  const ast = Markdoc.parse(content);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+async function parseAndTransform ({ content }: { content: string }) {
+  const ast = Markdoc.parse(content)
 
-  const errors = Markdoc.validate(ast, config);
-  if (errors.length) {
-    console.error(errors);
-    throw new Error("Markdoc validation error");
+  const errors = Markdoc.validate(ast, config)
+  if (errors.length > 0) {
+    console.error(errors)
+    throw new Error('Markdoc validation error')
   }
-  const transformedContent = Markdoc.transform(ast, config);
+  const transformedContent = Markdoc.transform(ast, config)
 
-  return transformedContent;
+  return transformedContent
 }
 
-function validateFrontmatter<T extends z.ZodTypeAny>({
+function validateFrontmatter<T extends z.ZodTypeAny> ({
   frontmatter,
   schema,
-  filepath,
+  filepath
 }: {
-  frontmatter: { [key: string]: unknown };
-  schema: T;
-  filepath: string;
+  frontmatter: Record<string, unknown>
+  schema: T
+  filepath: string
 }) {
   try {
-    const validatedFrontmatter = schema.parse(frontmatter);
-    return validatedFrontmatter as z.infer<T>;
+    const validatedFrontmatter = schema.parse(frontmatter)
+    return validatedFrontmatter as z.infer<T>
   } catch (e) {
     const errMessage = `
-      There was an error validating your frontmatter. 
+      There was an error validating your frontmatter.
       Please make sure your frontmatter for file: ${filepath} matches its schema.
-    `;
-    throw Error(errMessage + (e as Error).message);
+    `
+    throw Error(errMessage + (e as Error).message)
   }
 }
 
-export async function read<T extends z.ZodTypeAny>({
+export async function read<T extends z.ZodTypeAny> ({
   filepath,
-  schema,
+  schema
 }: {
-  filepath: string;
-  schema: T;
+  filepath: string
+  schema: T
 }) {
-  const rawString = await fs.readFile(filepath, "utf8");
-  const { content, data: frontmatter } = matter(rawString);
-  const transformedContent = await parseAndTransform({ content });
+  const rawString = await fs.readFile(filepath, 'utf8')
+  const { content, data: frontmatter } = matter(rawString)
+  const transformedContent = await parseAndTransform({ content })
   const validatedFrontmatter = validateFrontmatter({
     frontmatter,
     schema,
-    filepath,
-  });
+    filepath
+  })
 
-  const filename = filepath.split("/").pop();
-  if (typeof filename !== "string") {
-    throw new Error("Check what went wrong");
+  const filename = filepath.split('/').pop()
+  if (typeof filename !== 'string') {
+    throw new Error('Check what went wrong')
   }
-  const fileNameWithoutExtension = filename.replace(/\.[^.]*$/, "");
+  const fileNameWithoutExtension = filename.replace(/\.[^.]*$/, '')
 
   return {
     slug: fileNameWithoutExtension,
     content: transformedContent,
-    frontmatter: validatedFrontmatter,
-  };
+    frontmatter: validatedFrontmatter
+  }
 }
 
-export async function readOne<T extends z.ZodTypeAny>({
+export async function readOne<T extends z.ZodTypeAny> ({
   directory,
   slug,
-  frontmatterSchema: schema,
+  frontmatterSchema: schema
 }: {
-  directory: string;
-  slug: string;
-  frontmatterSchema: T;
+  directory: string
+  slug: string
+  frontmatterSchema: T
 }) {
-  const filepath = path.join(contentDirectory, directory, `${slug}.md`);
-  return read({
+  const filepath = path.join(contentDirectory, directory, `${slug}.md`)
+  return await read({
     filepath,
-    schema,
-  });
+    schema
+  })
 }
 
-export async function readAll<T extends z.ZodTypeAny>({
+export async function readAll<T extends z.ZodTypeAny> ({
   directory,
-  frontmatterSchema: schema,
+  frontmatterSchema: schema
 }: {
-  directory: string;
-  frontmatterSchema: T;
+  directory: string
+  frontmatterSchema: T
 }) {
-  const pathToDir = path.posix.join(contentDirectory, directory);
-  const paths = await globby(`${pathToDir}/*.md`);
+  const pathToDir = path.posix.join(contentDirectory, directory)
+  const paths = await globby(`${pathToDir}/*.md`)
 
-  return Promise.all(paths.map((path) => read({ filepath: path, schema })));
+  return await Promise.all(paths.map(async (path) => await read({ filepath: path, schema })))
 }
