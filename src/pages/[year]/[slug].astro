@@ -1,22 +1,22 @@
 ---
-import { readOne, readAll } from "../../lib/markdoc/read";
-import { blog } from "../../lib/markdoc/frontmatter.schema";
-import Renderer from "../../components/Renderer.astro";
-import BlogPostMeta from "../../components/BlogPostMeta.astro";
-import ContentLayout from "../../layouts/ContentLayout.astro";
-import { SITE_URL } from "../../config";
+import { readOne, readAll } from '../../lib/markdoc/read'
+import { blog } from '../../lib/markdoc/frontmatter.schema'
+import Renderer from '../../components/Renderer.astro'
+import BlogPostMeta from '../../components/BlogPostMeta.astro'
+import ContentLayout from '../../layouts/ContentLayout.astro'
+import { SITE_URL } from '../../config'
 import fs from 'fs/promises'
 
-export async function getStaticPaths() {
+export async function getStaticPaths () {
   const dir = await fs.readdir('./content/blog')
 
   const posts2 = await Promise.all(dir.map(async d => {
     const posts = await readAll({
       directory: `blog/${d}`,
-      frontmatterSchema: blog,
-    });
+      frontmatterSchema: blog
+    })
     return posts.map(posts => {
-      return {...posts, year: d}
+      return { ...posts, year: d }
     })
   }))
 
@@ -25,25 +25,25 @@ export async function getStaticPaths() {
   // we don't want to generate pages for posts that link to external websites
   const filteredPosts = posts3
     // .filter((p) => p.frontmatter.draft !== true)
-    .filter(({ frontmatter }) => !frontmatter.external);
+    .filter(({ frontmatter }) => !frontmatter.external)
 
   const paths = filteredPosts.map((post) => {
-    return { params: { slug: post.slug, year: post.year } };
-  });
+    return { params: { slug: post.slug, year: post.year } }
+  })
 
   return paths
 }
 
-const { slug, year } = Astro.params;
-if (typeof slug !== "string") {
-  throw Error(`slug should be string. Received: ${slug}`);
+const { slug, year } = Astro.params
+if (typeof slug !== 'string') {
+  throw Error(`slug should be string. Received: ${slug}`)
 }
 
 const { content, frontmatter } = await readOne({
   directory: `blog/${year}`,
   slug,
-  frontmatterSchema: blog,
-});
+  frontmatterSchema: blog
+})
 
 const ogImageAbsoluteUrl =
   frontmatter.external !== true && frontmatter.ogImagePath
