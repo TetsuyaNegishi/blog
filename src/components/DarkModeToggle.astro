@@ -1,5 +1,6 @@
 ---
 ---
+
 <mode-toggle class="flex">
   <button
     class="justify-self-end bg-black dark:bg-white ml-4 inline-flex h-6 w-11 items-center rounded-full"
@@ -21,7 +22,7 @@
 
 <script>
   // @ts-nocheck
-  function updateHTMLTheme (mode) {
+  function updateHTMLTheme(mode) {
     const themeColorMetaTag = document.head.querySelector(
       'meta[name="theme-color"]'
     )
@@ -41,7 +42,7 @@
       }
     }
   }
-  function updateStorageTheme (mode) {
+  function updateStorageTheme(mode) {
     if (mode === 'dark') {
       sessionStorage.setItem('theme', 'dark')
     } else {
@@ -49,10 +50,11 @@
     }
   }
   class ModeToggle extends HTMLElement {
-    constructor () {
+    constructor() {
       super()
-      let currentMode =
-        document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+      let currentMode = document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light'
       const toggle = this.querySelector('button')
       const iconElem = toggle?.querySelector('#mode-circle')
       if (iconElem) {

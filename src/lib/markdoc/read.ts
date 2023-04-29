@@ -10,7 +10,7 @@ import { config } from './markdoc.config'
 const contentDirectory = path.normalize('./content')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-async function parseAndTransform ({ content }: { content: string }) {
+async function parseAndTransform({ content }: { content: string }) {
   const ast = Markdoc.parse(content)
 
   const errors = Markdoc.validate(ast, config)
@@ -23,10 +23,10 @@ async function parseAndTransform ({ content }: { content: string }) {
   return transformedContent
 }
 
-function validateFrontmatter<T extends z.ZodTypeAny> ({
+function validateFrontmatter<T extends z.ZodTypeAny>({
   frontmatter,
   schema,
-  filepath
+  filepath,
 }: {
   frontmatter: Record<string, unknown>
   schema: T
@@ -44,9 +44,9 @@ function validateFrontmatter<T extends z.ZodTypeAny> ({
   }
 }
 
-export async function read<T extends z.ZodTypeAny> ({
+export async function read<T extends z.ZodTypeAny>({
   filepath,
-  schema
+  schema,
 }: {
   filepath: string
   schema: T
@@ -57,7 +57,7 @@ export async function read<T extends z.ZodTypeAny> ({
   const validatedFrontmatter = validateFrontmatter({
     frontmatter,
     schema,
-    filepath
+    filepath,
   })
 
   const filename = filepath.split('/').pop()
@@ -69,14 +69,14 @@ export async function read<T extends z.ZodTypeAny> ({
   return {
     slug: fileNameWithoutExtension,
     content: transformedContent,
-    frontmatter: validatedFrontmatter
+    frontmatter: validatedFrontmatter,
   }
 }
 
-export async function readOne<T extends z.ZodTypeAny> ({
+export async function readOne<T extends z.ZodTypeAny>({
   directory,
   slug,
-  frontmatterSchema: schema
+  frontmatterSchema: schema,
 }: {
   directory: string
   slug: string
@@ -85,13 +85,13 @@ export async function readOne<T extends z.ZodTypeAny> ({
   const filepath = path.join(contentDirectory, directory, `${slug}.md`)
   return await read({
     filepath,
-    schema
+    schema,
   })
 }
 
-export async function readAll<T extends z.ZodTypeAny> ({
+export async function readAll<T extends z.ZodTypeAny>({
   directory,
-  frontmatterSchema: schema
+  frontmatterSchema: schema,
 }: {
   directory: string
   frontmatterSchema: T
@@ -99,5 +99,7 @@ export async function readAll<T extends z.ZodTypeAny> ({
   const pathToDir = path.posix.join(contentDirectory, directory)
   const paths = await globby(`${pathToDir}/*.md`)
 
-  return await Promise.all(paths.map(async (path) => await read({ filepath: path, schema })))
+  return await Promise.all(
+    paths.map(async (path) => await read({ filepath: path, schema }))
+  )
 }

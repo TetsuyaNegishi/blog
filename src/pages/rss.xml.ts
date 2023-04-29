@@ -6,11 +6,13 @@ import { globby } from 'globby'
 
 export const get = async () => {
   const paths = await globby('content/blog/*/*.md')
-  const posts = await Promise.all(paths.map(async path => {
-    const post = await read({ filepath: path, schema: blog })
-    const year = path.split('/')[2]
-    return { ...post, year }
-  }))
+  const posts = await Promise.all(
+    paths.map(async (path) => {
+      const post = await read({ filepath: path, schema: blog })
+      const year = path.split('/')[2]
+      return { ...post, year }
+    })
+  )
 
   const sortedPosts = posts
     .filter((p) => !p.frontmatter.draft)
@@ -34,7 +36,7 @@ export const get = async () => {
       return {
         title,
         pubDate,
-        link
+        link,
       }
     }
 
@@ -47,7 +49,7 @@ export const get = async () => {
       title,
       pubDate,
       description,
-      link
+      link,
     }
   })
 
@@ -55,6 +57,6 @@ export const get = async () => {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: baseUrl,
-    items: rssItems
+    items: rssItems,
   })
 }

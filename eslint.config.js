@@ -1,6 +1,7 @@
 const { FlatCompat } = require('@eslint/eslintrc')
 const ts = require('@typescript-eslint/eslint-plugin')
 const tsParser = require('@typescript-eslint/parser')
+const prettier = require('eslint-config-prettier')
 
 const compat = new FlatCompat()
 
@@ -10,20 +11,23 @@ jsConfig.files = ['**/*.js', '**/*.mjs', '**/*.cjs']
 /** @type {import("eslint").Linter.FlatConfig[]} */
 module.exports = [
   {
-    ignores: ['dist']
+    ignores: ['dist'],
   },
   ...compat.extends('plugin:astro/recommended'),
   jsConfig,
   {
     files: ['src/*.ts'],
     languageOptions: {
-      parser: tsParser
+      parser: tsParser,
     },
     plugins: {
-      '@typescript-eslint': ts
+      '@typescript-eslint': ts,
     },
     rules: {
-      ...ts.configs.recommended.rules
-    }
-  }
+      ...ts.configs.recommended.rules,
+    },
+  },
+  {
+    rules: prettier.rules,
+  },
 ]

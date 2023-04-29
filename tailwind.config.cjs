@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['Space Grotesk', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif']
+        heading: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         transparent: 'transparent',
@@ -14,7 +14,7 @@ module.exports = {
         primary: {
           blue: 'rgb(var(--color-primary-blue) / <alpha-value>)',
           green: 'rgb(var(--color-primary-green) / <alpha-value>)',
-          yellow: 'rgb(var(--color-primary-yellow) / <alpha-value>)'
+          yellow: 'rgb(var(--color-primary-yellow) / <alpha-value>)',
         },
         text: {
           body: 'rgb(var(--color-text-body) / <alpha-value>)',
@@ -23,16 +23,16 @@ module.exports = {
           muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
           code: 'rgb(var(--color-text-code) / <alpha-value>)',
           link: 'rgb(var(--color-text-link) / <alpha-value>)',
-          selection: 'rgb(var(--color-text-selection) / <alpha-value>)'
+          selection: 'rgb(var(--color-text-selection) / <alpha-value>)',
         },
         bg: {
           body: 'rgb(var(--color-bg-body) / <alpha-value>)',
           code: 'rgb(var(--color-bg-code) / <alpha-value>)',
-          selection: 'rgb(var(--color-bg-selection) / <alpha-value>)'
+          selection: 'rgb(var(--color-bg-selection) / <alpha-value>)',
         },
         border: {
-          code: 'rgb(var(--color-border-code) / <alpha-value>)'
-        }
+          code: 'rgb(var(--color-border-code) / <alpha-value>)',
+        },
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -45,17 +45,17 @@ module.exports = {
               'background-image':
                 'linear-gradient(to right, rgb(var(--color-text-link)/1), rgb(var(--color-text-link)/1))',
               '&:hover': {
-                color: 'rgb(var(--color-text-link))'
-              }
+                color: 'rgb(var(--color-text-link))',
+              },
             },
             'h1, h2, h3, h4, h5': {
-              color: 'rgb(var(--color-text-heading))'
+              color: 'rgb(var(--color-text-heading))',
             },
             'code::before': {
-              content: 'none'
+              content: 'none',
             },
             'code::after': {
-              content: 'none'
+              content: 'none',
             },
             blockquote: {
               border: 'none',
@@ -66,7 +66,7 @@ module.exports = {
               'padding-top': '1.5rem',
               'padding-bottom': '0.5rem',
               'padding-left': '1.5rem',
-              'padding-right': '1.5rem'
+              'padding-right': '1.5rem',
             },
             'blockquote::before': {
               'font-family': 'Arial',
@@ -75,18 +75,18 @@ module.exports = {
               color: 'rgb(var(--color-text-bold))',
               position: 'absolute',
               left: '-10px',
-              top: '-10px'
+              top: '-10px',
             },
             'blockquote::after': {
-              content: ''
+              content: '',
             },
             'blockquote p:first-of-type::before': {
-              content: ''
+              content: '',
             },
             'blockquote p:last-of-type::after': {
-              content: ''
-            }
-          }
+              content: '',
+            },
+          },
         },
         bubblegum: {
           css: {
@@ -106,11 +106,11 @@ module.exports = {
             '--tw-prose-pre-code': 'rgb(var(--color-text-code))',
             '--tw-prose-pre-bg': 'rgb(var(--color-bg-code))',
             '--tw-prose-th-borders': 'rgb(var(--color-text-muted))',
-            '--tw-prose-td-borders': 'rgb(var(--color-text-muted))'
-          }
-        }
-      })
-    }
+            '--tw-prose-td-borders': 'rgb(var(--color-text-muted))',
+          },
+        },
+      }),
+    },
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [require('@tailwindcss/typography')],
 }

@@ -5,18 +5,18 @@ import {
   SITE_DESCRIPTION,
   SITE_URL,
   TWITTER_HANDLE,
-  MY_NAME
+  MY_NAME,
 } from '../config'
 
 export interface Props {
-  title?: string;
-  description?: string;
-  publishDate: string;
-  pagePath?: string;
-  ogImageAbsoluteUrl?: string;
-  ogImageAltText?: string;
-  ogImageWidth?: number;
-  ogImageHeight?: number;
+  title?: string
+  description?: string
+  publishDate: string
+  pagePath?: string
+  ogImageAbsoluteUrl?: string
+  ogImageAltText?: string
+  ogImageWidth?: number
+  ogImageHeight?: number
 }
 
 const {
@@ -27,7 +27,7 @@ const {
   ogImageAbsoluteUrl,
   ogImageAltText,
   ogImageWidth,
-  ogImageHeight
+  ogImageHeight,
 } = Astro.props
 
 const { meta, og, twitter } = getBlogPostMeta({
@@ -41,8 +41,8 @@ const { meta, og, twitter } = getBlogPostMeta({
   ogImageWidth,
   ogImageHeight,
   siteOwnerTwitterHandle: TWITTER_HANDLE,
-  contentAuthorTwitterHandle: TWITTER_HANDLE
-});
+  contentAuthorTwitterHandle: TWITTER_HANDLE,
+})
 ---
 
 <!-- Primary Meta Tags -->
