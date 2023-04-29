@@ -9,37 +9,37 @@ import CodeBlock from './CodeBlock.astro'
 import Heading from './Heading.astro'
 
 type Props = {
-  content: Content;
-};
+  content: Content
+}
 
 const { content } = Astro.props
 
 const components = {
   Heading: {
     Component: Heading,
-    props: {}
+    props: {},
   },
   CodeBlock: {
     Component: CodeBlock,
-    props: {}
+    props: {},
   },
   YouTubeEmbed: {
     Component: YouTubeEmbed,
-    props: {}
+    props: {},
   },
   TweetEmbed: {
     Component: TweetEmbed,
-    props: {}
+    props: {},
   },
   CodePenEmbed: {
     Component: CodePenEmbed,
-    props: {}
+    props: {},
   },
   GitHubGistEmbed: {
     Component: GitHubGistEmbed,
-    props: {}
-  }
-};
+    props: {},
+  },
+}
 ---
 
 <MarkdocRenderer content={content} components={components} />

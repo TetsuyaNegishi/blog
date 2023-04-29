@@ -7,11 +7,13 @@ import { SITE_TITLE } from '../config'
 import { globby } from 'globby'
 
 const paths = await globby('content/blog/*/*.md')
-const posts = await Promise.all(paths.map(async path => {
-  const post = await read({ filepath: path, schema: blog })
-  const year = path.split('/')[2]
-  return { ...post, year }
-}))
+const posts = await Promise.all(
+  paths.map(async (path) => {
+    const post = await read({ filepath: path, schema: blog })
+    const year = path.split('/')[2]
+    return { ...post, year }
+  })
+)
 
 const sortedPosts = posts
   .filter((p) => p.frontmatter.draft !== true)
@@ -19,7 +21,7 @@ const sortedPosts = posts
     (a, b) =>
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf()
-  );
+  )
 ---
 
 <PageLayout>
@@ -33,13 +35,12 @@ const sortedPosts = posts
           ).toLocaleDateString('en-us', {
             year: 'numeric',
             month: 'short',
-            day: 'numeric'
+            day: 'numeric',
           })
           return (
             <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
               <div class="title">
-                {post.frontmatter.external
-                  ? (
+                {post.frontmatter.external ? (
                   <a
                     href={post.frontmatter.url}
                     target="_blank"
@@ -55,8 +56,7 @@ const sortedPosts = posts
                       <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
                     </span>
                   </a>
-                    )
-                  : (
+                ) : (
                   <a
                     href={`/${post.year}/${post.slug}`}
                     class="unset
@@ -68,7 +68,7 @@ const sortedPosts = posts
                   >
                     {post.frontmatter.title}
                   </a>
-                    )}
+                )}
               </div>
               <div class="text-text-muted text-sm italic pt-1">
                 <time datetime={post.frontmatter.date.toISOString()}>

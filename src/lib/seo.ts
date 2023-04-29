@@ -49,7 +49,7 @@ interface BlogPostTwitterMeta {
   imageAlt?: string // same as blog post  og:image:alt
 }
 
-export function getPageMeta ({
+export function getPageMeta({
   title: pageTitle,
   description,
   baseUrl,
@@ -58,7 +58,7 @@ export function getPageMeta ({
   ogImageWidth,
   ogImageHeight,
   siteOwnerTwitterHandle,
-  contentAuthorTwitterHandle
+  contentAuthorTwitterHandle,
 }: {
   title: string
   description: string
@@ -69,15 +69,13 @@ export function getPageMeta ({
   ogImageHeight?: number
   siteOwnerTwitterHandle?: string
   contentAuthorTwitterHandle?: string
-}): { meta: PageMeta, og: PageOgMeta, twitter: PageTwitterMeta } {
+}): { meta: PageMeta; og: PageOgMeta; twitter: PageTwitterMeta } {
   if (pageTitle === '') {
     throw Error('title is required for page SEO')
   }
   if (ogImageAbsoluteUrl != null) {
     ogImageAltText =
-      ogImageAltText == null
-        ? `Preview image for ${pageTitle}`
-        : ogImageAltText
+      ogImageAltText == null ? `Preview image for ${pageTitle}` : ogImageAltText
     // ogImageWidth = !ogImageWidth ? 1200 : ogImageWidth;
     // ogImageHeight = !ogImageHeight ? 627 : ogImageHeight;
   }
@@ -92,7 +90,7 @@ export function getPageMeta ({
     image: ogImageAbsoluteUrl,
     imageAlt: ogImageAltText,
     imageWidth: ogImageWidth != null ? String(ogImageWidth) : undefined,
-    imageHeight: ogImageHeight != null ? String(ogImageHeight) : undefined
+    imageHeight: ogImageHeight != null ? String(ogImageHeight) : undefined,
   }
 
   const twitter: PageTwitterMeta = {
@@ -102,17 +100,17 @@ export function getPageMeta ({
     site: siteOwnerTwitterHandle,
     creator: contentAuthorTwitterHandle ?? siteOwnerTwitterHandle,
     image: ogImageAbsoluteUrl,
-    imageAlt: ogImageAltText
+    imageAlt: ogImageAltText,
   }
 
   return {
     meta,
     og,
-    twitter
+    twitter,
   }
 }
 
-export function getBlogPostMeta ({
+export function getBlogPostMeta({
   title: pageTitle,
   description,
   canonicalUrl,
@@ -124,7 +122,7 @@ export function getBlogPostMeta ({
   ogImageWidth,
   ogImageHeight,
   siteOwnerTwitterHandle,
-  contentAuthorTwitterHandle
+  contentAuthorTwitterHandle,
 }: {
   title: string
   description: string
@@ -138,7 +136,7 @@ export function getBlogPostMeta ({
   ogImageHeight?: number
   siteOwnerTwitterHandle?: string
   contentAuthorTwitterHandle?: string
-}): { meta: PageMeta, og: BlogPostOgMeta, twitter: BlogPostTwitterMeta } {
+}): { meta: PageMeta; og: BlogPostOgMeta; twitter: BlogPostTwitterMeta } {
   if (pageTitle === '') {
     throw Error('title is required for page SEO')
   }
@@ -149,7 +147,7 @@ export function getBlogPostMeta ({
   const meta: PageMeta = {
     title: pageTitle,
     description,
-    canonicalUrl
+    canonicalUrl,
   }
 
   const og: BlogPostOgMeta = {
@@ -162,7 +160,7 @@ export function getBlogPostMeta ({
     image: ogImageAbsoluteUrl,
     imageAlt: ogImageAltText,
     imageWidth: ogImageWidth != null ? String(ogImageWidth) : undefined,
-    imageHeight: ogImageHeight != null ? String(ogImageHeight) : undefined
+    imageHeight: ogImageHeight != null ? String(ogImageHeight) : undefined,
   }
 
   const twitter: BlogPostTwitterMeta = {
@@ -172,12 +170,12 @@ export function getBlogPostMeta ({
     site: siteOwnerTwitterHandle,
     creator: contentAuthorTwitterHandle ?? siteOwnerTwitterHandle,
     image: ogImageAbsoluteUrl,
-    imageAlt: ogImageAltText
+    imageAlt: ogImageAltText,
   }
 
   return {
     meta,
     og,
-    twitter
+    twitter,
   }
 }

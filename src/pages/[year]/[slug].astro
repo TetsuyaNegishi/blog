@@ -7,18 +7,20 @@ import ContentLayout from '../../layouts/ContentLayout.astro'
 import { SITE_URL } from '../../config'
 import fs from 'fs/promises'
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const dir = await fs.readdir('./content/blog')
 
-  const posts2 = await Promise.all(dir.map(async d => {
-    const posts = await readAll({
-      directory: `blog/${d}`,
-      frontmatterSchema: blog
+  const posts2 = await Promise.all(
+    dir.map(async (d) => {
+      const posts = await readAll({
+        directory: `blog/${d}`,
+        frontmatterSchema: blog,
+      })
+      return posts.map((posts) => {
+        return { ...posts, year: d }
+      })
     })
-    return posts.map(posts => {
-      return { ...posts, year: d }
-    })
-  }))
+  )
 
   const posts3 = posts2.flat()
 
@@ -42,13 +44,13 @@ if (typeof slug !== 'string') {
 const { content, frontmatter } = await readOne({
   directory: `blog/${year}`,
   slug,
-  frontmatterSchema: blog
+  frontmatterSchema: blog,
 })
 
 const ogImageAbsoluteUrl =
   frontmatter.external !== true && frontmatter.ogImagePath
     ? new URL(frontmatter.ogImagePath, SITE_URL).toString()
-    : undefined;
+    : undefined
 ---
 
 <ContentLayout title={frontmatter.title} date={frontmatter.date}>
