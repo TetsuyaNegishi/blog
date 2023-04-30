@@ -53,7 +53,7 @@ type属性にnumberが指定されていてもstring型になってしまう。
 yupは`yup.number()`を使って型を定義すると、フォームに入力した値も自動的にstringからnumberで変換してくれるようだ。
 おそらく`yupResolver`がバリデーションの定義によって変換していると思われる。
 
-zodとvestを使用した場合は変換はしてくれない。
+zodとvestを使用した場合は変換してくれない。
 zodとvestを使ってnumberを扱う場合は、`register()`に`valueAsNumber`をセットする必要がある。
 
 ```tsx
@@ -62,4 +62,6 @@ zodとvestを使ってnumberを扱う場合は、`register()`に`valueAsNumber`�
 
 ## まとめ
 
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 結論：yupが一番優れている
+<!-- textlint-able ja-technical-writing/ja-no-mixed-period -->

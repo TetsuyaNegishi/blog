@@ -11,7 +11,9 @@ const contentDirectory = path.normalize('./content')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function parseAndTransform({ content }: { content: string }) {
-  const ast = Markdoc.parse(content)
+  const tokenizer = new Markdoc.Tokenizer({ allowComments: true })
+  const token = tokenizer.tokenize(content)
+  const ast = Markdoc.parse(token)
 
   const errors = Markdoc.validate(ast, config)
   if (errors.length > 0) {

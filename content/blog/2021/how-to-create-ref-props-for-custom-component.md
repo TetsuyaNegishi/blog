@@ -61,7 +61,7 @@ const Example= () => {
 
 ではどうすればよいかというと`React.forwardRef`を使います。
 `React.forwardRef`から受け取った`ref`を参照したい要素に渡します。
-こうすることでカスタムコンポーネントでもJSXの要素と同じようにrefを実装することができます。
+こうすることでカスタムコンポーネントでもJSXの要素と同じようにrefを実装できます。
 
 ```tsx
 const Input = React.forwardRef((props, ref) => (
