@@ -17,6 +17,8 @@ yarn add @emotion/core @emotion/styled
 css propを使うにはbabelのpresetを入れる必要がある。
 しかし、parcelでbabelを入れる方法がよくわからない。残念。
 
-parcelで.babelrcが使えないことはないのだろうけど(実際.babelrcを使ってビルドしているコードも見つけた)、独自のconfigを書かないといけないなら諦めたほうがよいのかもしれない。
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+parcelで.babelrcが使えるのだろうけど(実際.babelrcを使ってビルドしているコードも見つけた)、独自のconfigを書かないといけないなら諦めたほうがよいのかもしれない。
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 
 [Parcelを使ったらその魅力は「Configを書かなくても良い」ではなく「Configを書かせない」なのだと気づいた](https://medium.com/@terrierscript/parcel-config-6f942da4d199)
