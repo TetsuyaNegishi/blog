@@ -1,0 +1,30 @@
+{
+  "files.exclude": {
+    "node_modules/**": true,
+  },
+  "files.watcherExclude": {
+    "node_modules/**": true,
+  },
+  "search.exclude": {
+    "node_modules/**": true,
+  },
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "markdown",
+    "astro"
+  ],
+  "eslint.format.enable": true,
+  "eslint.validate": ["astro"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true // eslint
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "cSpell.words": ["astrojs", "automerge", "markdoc", "tailwindcss", "textlint"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+}
