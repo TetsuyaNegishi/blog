@@ -1,0 +1,21 @@
+{
+  "core": {
+    "workingDir": "./.reg",
+    "actualDir": "./reg_images",
+    "thresholdRate": 0.1,
+    "ximgdiff": {
+      "invocationType": "client"
+    }
+  },
+  "plugins": {
+    "reg-keygen-git-hash-plugin": true,
+    "reg-publish-gcs-plugin": {
+      "bucketName": "blog-visual-regression"
+    },
+    "reg-notify-github-plugin": {
+      "prComment": true,
+      "prCommentBehavior": "default",
+      "clientId": "MzQ3NTAyMTY110/KyU/XNzQ2tzQ3MDDWD0ktKS6tTPRLTc8szsgEAA=="
+    }
+  }
+}
