@@ -13,7 +13,8 @@
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check .",
     "lint:textlint": "textlint .",
-    "screenshot": "playwright test"
+    "screenshot": "wait-on 'http://localhost:3000' && playwright test",
+    "regression": "reg-suit run"
   },
   "dependencies": {
     "@astrojs/prism": "^2.0.0",
@@ -55,6 +56,7 @@
     "textlint": "^13.3.2",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-technical-writing": "^7.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "wait-on": "^7.0.1"
   }
 }
