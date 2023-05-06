@@ -26,6 +26,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: ./.node-version
+      - name: workaround for detached HEAD
+        run: |
+          git fetch && git checkout ${{ github.head_ref }} && git pull
       - run: npm i
       - run: npm run dev &
       - run: npm run screenshot
