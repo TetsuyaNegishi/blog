@@ -1,7 +1,5 @@
 name: ci
 
-run-name: ${{ github.actor }} is learning GitHub Actions
-
 on:
   pull_request:
 
@@ -15,3 +13,23 @@ jobs:
           node-version-file: ./.node-version
       - run: npm i
       - run: npm run lint
+  visual-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ./.node-version
+      - name: workaround for detached HEAD
+        run: |
+          git fetch && git checkout ${{ github.head_ref }} && git pull
+      - run: npm i
+      - run: npm run dev &
+      - run: npm run screenshot
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+      - run: npm run regression
