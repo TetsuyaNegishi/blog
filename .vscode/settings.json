@@ -23,7 +23,14 @@
     "source.fixAll.eslint": true // eslint
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["astrojs", "automerge", "markdoc", "tailwindcss", "textlint"],
+  "cSpell.words": [
+    "astrojs",
+    "automerge",
+    "markdoc",
+    "querystring",
+    "tailwindcss",
+    "textlint"
+  ],
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
